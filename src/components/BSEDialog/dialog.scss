@@ -1,0 +1,10 @@
+::v-deep .bse-dialog-container {
+  background-color: var(--bg-color);
+  border: 1px solid #414141;
+  .el-dialog__body {
+    padding-top: 0 !important;
+  }
+  .el-dialog__title {
+    color: #fff;
+  }
+}

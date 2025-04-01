@@ -1,0 +1,292 @@
+.apiTrading {
+  font-family: PingFangSC-Semibold, PingFang SC;
+  $mainColor: #333333;
+  .banner {
+    width: 100%;
+    height: 450px;
+    padding-left: 210px;
+    padding-top: 100px;
+    background-image: url("../../assets//apiTrading-imgs/banner.png");
+    background-size: cover;
+    .indr {
+      .title {
+        font-size: 65px;
+        font-weight: 600;
+        color: $mainColor;
+      }
+      .title1 {
+        font-weight: 500;
+        font-size: 35px;
+        color: $mainColor;
+        margin-top: 18px;
+      }
+      .btns {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 25px;
+        width: 450px;
+        .btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 200px;
+          height: 50px;
+          color: #fff;
+          font-size: 18px;
+          font-weight: 500;
+          margin-top: 20px;
+          background-color: #fff;
+          cursor: pointer;
+          border-radius: 6px;
+          -webkit-border-radius: 6px;
+          -moz-border-radius: 6px;
+          -ms-border-radius: 6px;
+          -o-border-radius: 6px;
+          &.type1 {
+            background-color: var(--theme-color);
+          }
+          &.type2 {
+            border: 2px solid var(--theme-color);
+            color: var(--theme-color);
+          }
+        }
+      }
+    }
+  }
+  .interface {
+    padding: 0 210px;
+    background-color: #fff;
+    color: $mainColor;
+    margin-top: 80px;
+    .title {
+      font-size: 50px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .txt {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .process {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 340px;
+      margin-top: 40px;
+      padding: 0 100px;
+      background-color: #f8f9fb;
+      .user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 104px;
+        height: 100%;
+        padding-top: 103px;
+        .user_pic {
+          width: 104px;
+          height: 104px;
+        }
+        .label {
+          width: 100%;
+          text-align: center;
+          margin-top: 34px;
+        }
+      }
+      .pc {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 151px;
+        height: 100%;
+        padding-top: 103px;
+        .pc_pic {
+          width: 151px;
+          height: 100px;
+        }
+        .label {
+          width: 100%;
+          text-align: center;
+          margin-top: 34px;
+        }
+      }
+      .center {
+        width: 100%;
+        height: 100%;
+        margin: 0 60px;
+        padding-top: 54px;
+        .top {
+          width: 944px;
+          margin-bottom: 38px;
+          .arrow1 {
+            width: 994px;
+            height: 35px;
+          }
+        }
+        .con {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .arrow2 {
+            width: 363px;
+            height: 35px;
+          }
+          .mid {
+            .api_pic {
+              width: 80px;
+              height: 80px;
+            }
+            .label {
+              text-align: center;
+              margin-top: 34px;
+            }
+          }
+        }
+      }
+      .text {
+        font-size: 28px;
+        font-weight: 500;
+        color: $mainColor;
+      }
+    }
+    .api {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 80px;
+      .boxs {
+        width: 730px;
+        height: 370px;
+        padding: 30px;
+        box-shadow: 2px 4px 6px 2px rgba(237, 241, 255, 0.6);
+        border-radius: 12px;
+        .title {
+          font-size: 28px;
+          font-weight: 500;
+          color: $mainColor;
+          margin-bottom: 30px;
+        }
+        .box {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          .cell {
+            display: flex;
+            align-items: center;
+            width: 320px;
+            height: 60px;
+            padding-left: 20px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            .icon {
+              width: 32px;
+              height: 32px;
+            }
+            &.bgColor {
+              background-color: #F4F5F7;
+            }
+            .txt {
+              font-weight: 500;
+              font-size: 16px;
+              color: #666;
+              margin-left: 20px;
+              margin-top: -5px;
+              padding-right: 50px;
+              line-height: 22px;
+            }
+            border-radius: 6px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            -ms-border-radius: 6px;
+            -o-border-radius: 6px;
+          }
+        }
+      }
+    }
+  }
+  .advertising {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 430px;
+    color: #fff;
+    margin-top: 80px;
+    padding: 96px;
+    background-color: var(--theme-color);
+    background-image: url("../../assets/apiTrading-imgs/编组 18.png");
+    .title {
+      font-weight: 500;
+      font-size: 38px;
+    }
+    .txt {
+      font-size: 18px;
+      font-weight: 400;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 220px;
+      height: 60px;
+      color: var(--theme-color);
+      font-size: 26px;
+      font-weight: 500;
+      background-color: #fff;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+      cursor: pointer;
+      .tele_icon {
+        width: 30px;
+        height: 30px;
+      }
+      .text {
+        margin-left: 20px;
+      }
+    }
+  }
+  .help {
+    margin-top: 80px;
+    padding: 0 210px;
+    .label {
+      font-size: 50px;
+      font-weight: 600;
+      color: $mainColor;
+      margin-bottom: 65px;
+    }
+    .li {
+      padding-bottom: 40px;
+      .title {
+        display: flex;
+        font-size: 18px;
+        font-weight: 500;
+        color: $mainColor;
+        margin-bottom: 5px;
+        &.active {
+          color: var(--theme-color);
+          i{
+            color: inherit;
+          }
+        }
+        i {
+          font-size: 28px;
+          cursor: pointer;
+          color: $mainColor;
+        }
+      }
+      .text {
+        font-size: 14px;
+        color: #8992a6;
+        line-height: 23px;
+        .link {
+          color: var(--theme-color);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

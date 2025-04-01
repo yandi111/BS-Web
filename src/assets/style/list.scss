@@ -1,0 +1,317 @@
+.table-content {
+  .common-filter {
+    padding-top: 20px ;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    // input::placeholder {
+    //   font-size: 14px;
+    //   font-family: PingFang SC;
+    //   font-weight: 400;
+    //   color: #8992a6;
+    // }
+    // .input-width {
+    //   width: 287px;
+    // }
+    // .select-width {
+    //   width: 170px;
+    // }
+  
+    .el-form--inline .el-form-item {
+      vertical-align: middle;
+    }
+  
+    // .el-input--small .el-input__icon {
+    //   line-height: 40px;
+    // }
+  
+    // .filter-input-select {
+    //   .icon-find {
+    //     width: 20px;
+    //     height: 20px;
+    //     display: inline-block;
+    //     vertical-align: text-bottom;
+    //   }
+    //   .icon-filter {
+    //     width: 24px;
+    //     height: 24px;
+    //   }
+    //   > .el-input__inner {
+    //     width: 235px;
+    //     height: 42px;
+    //     line-height: 42px;
+    //   }
+    //   .el-select {
+    //     width: 90px;
+    //      .el-input__inner {
+    //       border: none;
+    //       padding: 0 6px;
+    //       font-size: 16px;
+    //       font-family: PingFang SC;
+    //       font-weight: 400;
+    //       color: #333333;
+    //       height: 40px;
+    //       margin-top: 1px;
+    //     }
+    //   }
+    // }
+  
+    /** 下拉框默认宽度 */
+    // .default-select-width {
+    //   width: 155px;
+    // }
+  
+    /** 查询按钮样式 */
+    .filter-btn {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 20px;
+    }
+
+    .reset-btn {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 20px;
+      color: #90ff00;
+      font-size: 16px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #90ff00;
+    }
+  }
+  
+  .common-table {
+    width: 100%;
+    /** 头部样式 */
+    .el-table th.el-table__cell>.cell {
+      font-size: 14px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: #666666;
+    }
+
+    .icon-name {
+      width: 17px;
+      height: 17px;
+    }
+  
+    /** 表格行高 */
+    ::v-deep   .el-table {
+      .el-table__body  {
+        .cell {
+          height: 83px;
+        }
+      }
+    }
+  }
+
+  .common-page {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 22px;
+    // .el-pagination__editor.el-input {
+    //   margin: 0 21px 0 21px;
+    // }
+
+    .el-pagination__jump {
+      color: #333333;
+      font-size: 16px;
+    }
+  }
+  
+  .flex-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    .main-content {
+      line-height: 30px;
+      font-size: 16px;
+      font-family: PingFang SC;
+      font-weight: 600;
+      color: #333333;
+    }
+    .tip-content {
+      line-height: 30px;
+      font-size: 12px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: #8992a6;
+    }
+    .normal-content {
+      line-height: 30px;
+      font-size: 16px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: #333333;
+    }
+    .payment {
+      span {
+        padding: 0 20px 0 5px;
+      }
+  
+      /** 微信 */
+      .pay-wx {
+        position: relative;
+        &::before {
+          position: absolute;
+          content: '';
+          width: 2px;
+          height: 12px;
+          background: #90ff00;
+          left: 0;
+          top: 30%;
+        }
+      }
+  
+      /** 银行卡 */
+      .pay-card {
+        position: relative;
+        &::before {
+          position: absolute;
+          content: '';
+          width: 2px;
+          height: 12px;
+          background: #FFD887;
+          left: 0;
+          top: 30%;
+        }
+      }
+  
+      /** 支付宝 */
+      .pay-alipay {
+        position: relative;
+        &::before {
+          position: absolute;
+          content: '';
+          width: 2px;
+          height: 12px;
+          background: #90ff00;
+          left: 0;
+          top: 30%;
+        }
+      }
+    }
+  }
+  
+  .flex-box-btn {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    .btn-success, .btn-error {
+      min-width: 95px;
+      height: 30px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: PingFang SC;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+  
+    .btn-error {
+      border-color: #F75F52;
+      background-color: #F75F52;
+      &:hover {
+        border-color: #F75F52;
+      }
+      &:focus {
+        border-color: #F75F52;
+      }
+    }
+  
+    .btn-success {
+      border-color: #90ff00;
+      background-color: #90ff00;
+      &:hover {
+        border-color: #90ff00;
+      }
+      &:focus {
+        border-color: #90ff00;
+      }
+    }
+  }
+}
+
+.tablebtn-group {
+  & span {
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+    font-family: PingFang SC;
+  }
+  // 列表按钮颜色枚举
+  .color-blue {
+    color: #90ff00;
+  }
+
+  .color-orange {
+    color: #F75F52;
+  }
+
+  .color-green {
+    color: #90ff00;
+  }
+  .border {
+    font-family: PingFang SC;
+    font-weight: 500;
+    &-green {
+      border: 1px solid #90ff00;
+      color: #90ff00;
+      border-radius: 20px;
+      padding: 8px 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+    }
+    &-orange {
+      border: 1px solid #F75F52;
+      color: #F75F52;
+      border-radius: 20px;
+      padding: 8px 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+    }
+  }
+
+  .btn {
+    font-family: PingFang SC;
+    font-weight: 500;
+    &-primary {
+      border: 2px solid #90ff00;
+      color: #90ff00;
+      padding: 8px 20px;
+      border-radius: 6px;
+    }
+    &-error {
+      border: 2px solid #F75F52;
+      color: #F75F52;
+      padding: 8px 20px;
+      border-radius: 6px;
+    }
+  }
+
+  .span {
+    font-family: PingFang SC;
+    font-weight: 500;
+    &-primary {
+      color: #90ff00;
+    }
+    &-error {
+      color: #F75F52;
+    }
+  }
+}
+

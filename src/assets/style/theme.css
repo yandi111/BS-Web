@@ -1,0 +1,132 @@
+html[data-theme="dark"] {
+  --main-text-color: #ffffff;
+  /* --tabs-text-color: #96a2b2; */
+  --secondary-text-color: #fff;
+  --tooltip-text-color: #ffffff;
+  --table-label-color: #8992a6;
+  --border-color: #333333;
+  --main-bg: #121212;
+  --gap-bg: #222222;
+  --pop-bg: #1d1d1d;
+  --pop-hover-bg: #121212;
+  --select-bg: #1d1d1d;
+  --mask-tips-bg: #333333;
+  --select-hover: #333333;
+  --calculator-content-bg: #333333;
+  --loading-bg: #23272e;
+  --detail-table-header: #1d1d1d;
+  --box-shadow-alpha: 0;
+  --runway: #97a3ad;
+  --dialog_order_bg: #242424;
+  --dialog_card_bg: #181818;
+  --dialog-line-color: #222222;
+  --row-hover-bg: #1d1d1d;
+  --dialog-bg: #1d1d1d;
+  --deep-bg: #1d1d1d;
+  --handicap-hover: rgba(255, 255, 255, 0.2);
+  --fall-line: #2e0d12;
+  --pass-pricebox-bg: #343434;
+	--pass-marketprice-bg: #464646;
+  --pass-selectbox-bg:#121212;
+  --pass-datepick-gapline-color:#333333;
+  --btn-disabled-bg:#235D46;
+  --trade-label-text-color: rgba(255, 255, 255, 0.7);
+  --trade-text-color: #fff;
+  --trade-btn-color: rgba(255, 255, 255, 0.1) !important;
+  --trade-line-color: #90ff00;
+  /* --trade-order-Input-bg: #1d1d1d; */
+  --trade--order-Input-bg: rgba(255, 255, 255, 0.1);
+  --trade--header-bg: #1d1d1d;
+  /* --trade-slider-line-bg: #96a2b2; */
+  /* --trade--tabs-input-bg: #1d1d1d; */
+  /* --trade--tabs-disabled-input-bg: #3c3c3c; */
+  --trade-tabs-select-bg: #1d1d1d;
+  /* --trade-tranf-input-bg: rgba(255, 255, 255, 0.1); */
+  --trade-full-btn-bd: white;
+  --trade-dialog-line-bg: rgba(255, 255, 255, 0.1);
+  /* --trade-lever-InputUnit-bg: #1e1e1e; */
+  /* --trade-lever-InputUnitActive-bg: #343434; */
+  --trade-lever-btn-gb: #1d1d1d;
+  /* --trade-lever-Input-gb: #515153; */
+  /* --trade-lever-Input-bg: transparent; */
+  --trade-lever-sliderTxt-color: rgb(183, 189, 198);
+  /* --trade-place-input-bd: rgba(81, 113, 255, 0.1); */
+  --trade-header-bg: #121212;
+  --trade-slider-col: rgba(255, 255, 255, 0.1);
+  --spot-baySellType-bg: #1d1d1d;
+  --s-item-bg: rgba(255, 255, 255, 0.1);
+  --btn-border-col: #ffffff;
+  --pass-invalid-bg: rgba(33, 191, 144, 0.2);
+  /* --pass-input-bg: rgba(255, 255, 255, 0.1); */
+  --pass-tablelabel-bg: #1D1D1D;
+  --pass-tablelabel-col: #8992A6;
+  --pass-tablecontent-bg: rgba( 255, 255, 255, 0.05);
+  --pass-reset-bt: rgba(255, 255, 255, .1);
+  
+}
+:root {
+  --main-text-color: #333333;
+  /* --tabs-text-color: #96a2b2; */
+  --secondary-text-color: #00082d;
+  --tooltip-text-color: #6a7182;
+  --table-label-color: #8992a6;
+  --border-color: #f4f5f7;
+  --main-bg: #ffffff;
+  --gap-bg: #f8f9fb;
+  --pop-bg: #fff;
+  --pop-hover-bg: #f5f7fa;
+  --select-bg: #ffffff;
+  --calculator-content-bg: #f8f9fb;
+  --loading-bg: #f8f9f9;
+  --mask-tips-bg: #ffffff;
+  --select-hover: #f4f5f7;
+  --detail-table-header: #f4f5f7;
+  --box-shadow-alpha: 0.3;
+  --runway: #ededed;
+  --dialog_order_bg: #f4f5f7;
+  --dialog_card_bg: #ffffff;
+  --dialog-line-color: #f0f0f0;
+  --row-hover-bg: #fafafa;
+  --dialog-bg: #ffffff;
+  --deep-bg: #f4f5f7;
+  --handicap-hover: #fafafa;
+  --pass-pricebox-bg: #f9f9f9;
+  --pass-marketprice-bg: #ececec;
+  --pass-selectbox-bg:#ffffff;
+  --pass-datepick-gapline-color:#EBEEF5;
+  --btn-disabled-bg:#f4f5f7;
+  --fall-line: #fce5e8;
+  --trade-label-text-color: #333;
+  --trade-text-color: #333;
+  --trade-btn-color: #f4f5f7 !important;
+  --trade-line-color: #f8f9fb;
+  /* --trade-order-Input-bg: #fff;
+  --trade--order-Input-bg: #fafafa; */
+  --trade--header-bg: #fafafa;
+  --trade-slider-line-bg: #fafafa;
+  /* --trade--tabs-input-bg: #f5f7fa;
+  --trade--tabs-disabled-input-bg: #e4e4e4; */
+  --trade-tabs-select-bg: #edf1ff;
+  /* --trade-tranf-input-bg: #fff; */
+  --trade-full-btn-bd: transparent;
+  --trade-dialog-line-bg: #f8f9fb;
+  /* --trade-lever-InputUnit-bg: #fff;
+  --trade-lever-InputUnitActive-bg: #f3f5f7;
+  --trade-lever-Input-bg: #e1e1e1;
+  --trade-lever-Input-gb: #f8f9fb; */
+  --trade-lever-btn-gb: #fff;
+  --trade-lever-sliderTxt-color: rgb(94, 102, 115);
+  /* --trade-place-input-bd: rgba(81, 113, 255, 0.1); */
+  --trade-header-bg: white;
+  --trade-slider-col: #f8f9fb;
+  --spot-baySellType-bg: #ededed;
+  --s-item-bg: #f4f5f7;
+  --btn-border-col: #f4f5f7;
+  --pass-invalid-bg: #D3F8ED;
+  /* --pass-input-bg: #F9F9F9; */
+  --pass-tablelabel-bg: #F9F9F9;
+  /* --pass-tablelabel-col: #96A2B2; */
+  --pass-tablecontent-bg: rgba( 250, 250, 250, 0.8);
+  --pass-reset-bt: #F4F5F7;
+
+}

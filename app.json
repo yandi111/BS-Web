@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "dfe32469-25fa-446f-a0df-884c07aea08a"
+      }
+    },
+    "android": {
+      "package": "com.dawn_cc.exweb"
+    }
+  }
+}

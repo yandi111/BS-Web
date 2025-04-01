@@ -1,0 +1,252 @@
+.apiDocument {
+  position: relative;
+  background-color: #333333;
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    padding: 0 30px;
+    background-color: #111111;
+    z-index: 99;
+    .left {
+      display: flex;
+      align-items: center;
+      .logo {
+        width: 180px;
+        cursor: pointer;
+        img {
+          width: 100%;
+        }
+      }
+      .tab {
+        display: flex;
+        align-items: center;
+        height: 25px;
+        border-left: 1px solid #96a2b2;
+        margin-left: 30px;
+        .item {
+          position: relative;
+          font-size: 14px;
+          color: #96a2b2;
+          margin-left: 40px;
+          cursor: pointer;
+          &.active {
+            position: relative;
+            color: #ffffff;
+            &::after {
+              content: "";
+              position: absolute;
+              left: 0;
+              bottom: -21px;
+              content: "";
+              width: 100%;
+              height: 2px;
+              border-radius: 2px;
+              background-color: var(--theme-color);
+              -webkit-border-radius: 2px;
+              -moz-border-radius: 2px;
+              -ms-border-radius: 2px;
+              -o-border-radius: 2px;
+            }
+          }
+        }
+      }
+    }
+    .right {
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 30px;
+        color: #fff;
+        background-color: var(--theme-color);
+        border-radius: 6px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+        opacity: 0.9;
+        cursor: pointer;
+      }
+    }
+  }
+  .sideBar {
+    position: fixed;
+    top: 75px;
+    left: 0;
+    width: 265px;
+    height: calc(100vh - 70px);
+    padding-top: 20px;
+    background-color: #111111;
+    .search {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+      padding: 5px 20px;
+      font-size: 14px;
+      color: #96a2b2;
+      input {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: none;
+        background-color: inherit;
+        color: inherit;
+      }
+      .iconfont {
+        font-size: 18px;
+        cursor: pointer;
+      }
+      cursor: default;
+      margin-bottom: 20px;
+      background-color: #333333;
+      border-radius: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      -ms-border-radius: 0px;
+      -o-border-radius: 0px;
+    }
+    .listBox {
+      width: 100%;
+      max-height: calc(100vh - 70px - 50px);
+      overflow-y: auto;
+      margin-right: -2px;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+      &::-webkit-scrollbar-track-piece {
+        background-color: #000622;
+        border-radius: 3px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #a5afbe;
+        border-radius: 3px;
+      }
+      .list {
+        padding-bottom: 50px;
+        .cell {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 50px;
+          padding: 5px 20px;
+          font-size: 14px;
+          color: #96a2b2;
+          cursor: pointer;
+          border-radius: 12px 0 0 12px;
+          -webkit-border-radius: 12px 0 0 12px;
+          -moz-border-radius: 12px 0 0 12px;
+          -ms-border-radius: 12px 0 0 12px;
+          -o-border-radius: 12px 0 0 12px;
+
+          &.tabActive {
+            position: relative;
+            color: #fff;
+            background-color: #333333;
+            &::after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              right: 5px;
+              width: 3px;
+              height: 25px;
+              transform: translateY(-50%);
+              background-color: var(--theme-color);
+              border-radius: 3px;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              -ms-border-radius: 3px;
+              -o-border-radius: 3px;
+              -webkit-transform: translateY(-50%);
+              -moz-transform: translateY(-50%);
+              -ms-transform: translateY(-50%);
+              -o-transform: translateY(-50%);
+            }
+          }
+          &:hover {
+            color: #fff;
+            background-color: #333333;
+          }
+        }
+      }
+    }
+  }
+  .container {
+    margin-left: 265px;
+    background-color: #f3f7f9;
+    height: 100vh;
+    overflow: auto;
+    .contentBox {
+      width: 100%;
+      height: 100%;
+      .box {
+        padding: 0 10px 10px 30px;
+        color: #333;
+        .title {
+          font-size: 28px;
+          font-weight: 500;
+        }
+        .title1 {
+          font-size: 20px;
+          font-weight: 500;
+          margin: 20px 0;
+        }
+        .title2 {
+          font-size: 20px;
+          margin: 20px 0;
+        }
+        .code {
+          font-size: 14px;
+          // height: 500px;
+          line-height: 32px;
+        }
+      }
+      .pra {
+        .title {
+          font-size: 28px;
+          color: #333;
+        }
+        .text1 {
+          font-size: 20px;
+          color: #333;
+          margin: 20px 0;
+        }
+        .text2 {
+          font-size: 20px;
+          color: #a5afbe;
+          margin-bottom: 20px;
+        }
+        .dataBody {
+          display: flex;
+          justify-content: space-between;
+          padding-right: 40px;
+          .left {
+            width: 55%;
+            .bodyData {
+              width: 100%;
+            }
+          }
+          .right {
+            width: 45%;
+            margin-left: 40px;
+            .responseData {
+              line-height: 32px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+::v-deep .el-table {
+  .cell {
+    text-align: center;
+  }
+}

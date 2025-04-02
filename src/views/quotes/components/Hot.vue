@@ -90,22 +90,24 @@ export default {
   <div v-for="(item, index) of list" :key="index" class="card flex">
    <p class="card_subTitle">{{$t('24小时热门')}}</p>
 
-   <div class="card_section flex">
+   <div class="card_section flex jb">
     <div class="card_left flex">
      <div class="card_currency flex">
       <img :src="item.symbolInfo.icon" alt="">
       <p class="card_name">{{ item.symbolInfo.coinsName }}</p>
      </div>
      <strong class="card_num">{{ item.market.close }}</strong>
-     <div class="card_rato flex">
-      <p :class="[+item.market.increase24H < 0 ? 'reduce' : 'add', 'card_label_Increase card_label']">{{ +item.market.increase24H > 0 ? '+' : '' }}{{ item.market.increase24H }}%</p>
-      <p class="card_label">{{$t('24h成交量')}}</p>
-      <p class="card_label">{{ item.market.vol }} {{ item.symbolInfo.coinsName.replace('-USDT', '') }}</p>
-     </div>
     </div>
 
     <Echarts :option="item.options" width="120px" height="66px" />
    </div>
+
+    <div class="card_rato flex">
+      <p :class="[+item.market.increase24H < 0 ? 'reduce' : 'add', 'card_label_Increase card_label']">{{ +item.market.increase24H > 0 ? '+' : '' }}{{ item.market.increase24H }}%</p>
+      <p class="card_label">{{$t('24h成交量')}}</p>
+      <p class="card_label">{{ item.market.vol }} {{ item.symbolInfo.coinsName.replace('-USDT', '') }}</p>
+    </div>
+
   </div>
  </div>
 </template>
@@ -114,10 +116,23 @@ export default {
 .box {
  margin-bottom: 71px;
  .card {
+
+   transition: all .18s linear;
+   cursor: pointer;
+
+   .card_rato{
+     margin-top: 7px;
+   }
+
   &:not(:last-child) {
    margin-right: 20px;
   }
-  padding: 13px 15px;
+
+   &:hover {
+     transform: translateY(-12px);
+   }
+
+  padding: 14px 13px 12px 17px;
   width: calc(100% / 3 - (20px / 3));
   border-radius: 10px;
   border: 1px solid #252525;

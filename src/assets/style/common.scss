@@ -259,7 +259,7 @@ blockquote:after {
  color: #ED3C2F;
 }
 .add {
- color: #90FF00
+ color: #0CBB57
 }
 
 .mb-15 {
@@ -280,5 +280,56 @@ blockquote:after {
   &:after {
    border-bottom-color: #252525 !important;
   }
+ }
+}
+
+//分页
+.el-pagination.is-background {
+ border-color: #252525;
+ .el-pager li {
+  background-color: #252525;
+  border-color: #252525;
+  &:hover {
+   background-color: #252525;
+   border-color: #252525;
+  }
+ }
+ .el-pager li:not(.disabled).active {
+  background-color: #90FF00;
+  border-color: #90FF00;
+  color: #252525;
+ }
+ .el-pager li:not(.disabled, .active):hover {
+  color: #F4F4F4;
+ }
+ .el-pager li.disabled {
+  background-color: #252525;
+  border-color: #252525;
+ }
+}
+
+.el-button {
+ background-color: #90FF00;
+ border-color: #90FF00;
+ color: #252525!important;
+ > span{
+  color: #252525!important;
+ }
+ &:hover {
+  background-color: #90FF00;
+  border-color: #90FF00;
+ }
+ &.is-active {
+  background-color: #90FF00;
+  border-color: #90FF00;
+ }
+ &.is-plain {
+  background-color: transparent;
+  border-color: #252525;
+  color: #F0F0F0;
+ }
+ &.is-plain:hover {
+  background-color: transparent;
+  border-color: #252525;
  }
 }

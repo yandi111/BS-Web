@@ -6,11 +6,14 @@ import * as echarts from 'echarts';
 import dayjs from 'dayjs'
 import {NumberFormat} from "@/utils/format";
 import {GetTradingPairs} from "@/api/spotTrading";
+import NoData from "@/components/NoData.vue";
+import {mapState} from "vuex";
 
 const bigNumber = new BigNumberUtils()
 export default {
  components: {
-  Echarts
+  Echarts,
+   NoData
  },
  data() {
   return {
@@ -50,15 +53,37 @@ export default {
 
    socket: null,
    socketTime: null,
+    timer: null
   }
  },
  mounted() {
   this.getList()
   this.createSocket()
  },
+  destroyed() {
+   clearTimeout(this.timer);
+  },
+  watch: {
+   'ruleForm.symbol' () {
+     if (this.timer !== null) {
+       clearTimeout(this.timer)
+     }
+
+     this.timer = setTimeout( () => {
+       this.onSearch()
+     }, 600)
+   }
+  },
+  computed: {
+    ...mapState({
+      // token
+      token: (state) => state.login?.token
+    }),
+  },
  methods: {
   // 切换tabs
   onTabs(e) {
+    console.log(e)
    switch (e) {
     case 1:
      this.ruleForm.isCollect = 1;
@@ -114,7 +139,7 @@ export default {
      item.market.close = NumberFormat({val: item.market.close, minimumFractionDigits: 2})
      item.market.increase = item.market.increase24H
      item.market.increase24H = NumberFormat({val: item.market.increase24H, minimumFractionDigits: 2, style: 'percent'})
-     item.options = {
+      item.options = {
       grid: {
        bottom: 0,
        left: 0,
@@ -141,13 +166,13 @@ export default {
         smooth: 0.6,
         symbol: 'none',
         itemStyle: {
-         color: +item.market.increase24H < 0 ? '#ED3C2F' : '#0CBB57'
+         color: +item.market.increase < 0 ? '#ED3C2F' : '#0CBB57'
         },
         areaStyle: {
          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
            offset: 0,
-           color: +item.market.increase24H < 0 ? 'rgba(237, 60, 47, 0.5)' : 'rgba(12, 187, 87, .5)'
+           color: +item.market.increase < 0 ? 'rgba(237, 60, 47, 0.5)' : 'rgba(12, 187, 87, .5)'
           },
           {
            offset: 1,
@@ -206,7 +231,7 @@ export default {
    // 接收到的参数
    try {
     const data = JSON.parse(e.data).data
-    console.log(data)
+    // console.log(data)
     let find = this.list.find(item => item.symbolInfo.coinsName === data.symbol)
 
     if (!find) return
@@ -261,7 +286,7 @@ export default {
   <div class="c-search flex">
    <div class="tabs flex">
     <div v-for="item of tabs" @click="onTabs(item.id)" :class="[active === item.id ? 'active' : '', 'tab flex']">
-     <i></i>
+     <i v-if="item.id === 1"></i>
      {{ item.name }}
     </div>
    </div>
@@ -271,8 +296,8 @@ export default {
    </el-input>
   </div>
 
-  <div class="c-table">
-   <el-table :border="false" :data="list">
+  <div class="c-table" v-if="list.length > 0">
+   <el-table :border="false" :data="list" :empty-text="' '">
     <el-table-column :label="$t('lang_1189')">
      <template slot-scope="{row}">
       <div class="info flex">
@@ -282,7 +307,7 @@ export default {
 
        <div class="currency flex">
         <!-- <p class="name">BTC <span>USDT</span></p> -->
-        <p class="name">{{ row.symbolInfo.coinsName }}</p>
+         <p class="name">{{ row.symbolInfo.coinsName.split('-')[0] }} <span>{{ row.symbolInfo.coinsName.split('-')[1] }}</span></p>
         <p class="content">{{$t('spot_33')}}</p>
        </div>
       </div>
@@ -312,6 +337,13 @@ export default {
 
    <el-pagination  background :page-size="ruleForm.size" :pager-count="9" :current-page="ruleForm.page" :hide-on-single-page="true" @current-change="onCurrent" layout="prev, pager, next" :total="total"></el-pagination>
   </div>
+
+  <div v-if="list.length === 0 && active === 1" class="no-data-warp">
+    <NoData :text="'暂无结果，前往市场添加'">
+      <el-button type="primary">添加自选</el-button>
+    </NoData>
+  </div>
+
  </div>
 </template>
 
@@ -376,11 +408,20 @@ export default {
    }
   }
  }
+
+  .no-data-warp{
+    margin-top: 149px;
+    margin-bottom: 463px;
+    button{
+      margin-top: 30px;
+    }
+  }
 }
 
 .c-table {
  display: flex;
  flex-direction: column;
+  margin-bottom: 107px;
 
  .el-pagination {
   margin: 50px auto 0;
@@ -442,10 +483,19 @@ export default {
 
 ::v-deep {
  .el-table {
+   th.el-table__cell >.cell{
+     color: #737373;
+   }
   th, tr, td {
    border: none !important;
    background-color: #141414 !important;
   }
+
+   tr:hover{
+     td {
+         background-color: #1B1B1B !important;
+       }
+     }
 
   .el-table__empty-block {
    background-color: #141414;

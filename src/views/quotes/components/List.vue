@@ -1,286 +1,3 @@
-<script>
-import {GetQuotesApi, HandleSymbol} from "@/api/quotes";
-import BigNumberUtils from "@/utils/format";
-import Echarts from "@/components/Echarts/index.vue";
-import * as echarts from 'echarts';
-import dayjs from 'dayjs'
-import {NumberFormat} from "@/utils/format";
-import {GetTradingPairs} from "@/api/spotTrading";
-import NoData from "@/components/NoData.vue";
-import {mapState} from "vuex";
-
-const bigNumber = new BigNumberUtils()
-export default {
- components: {
-  Echarts,
-   NoData
- },
- data() {
-  return {
-   loading: false,
-
-   active: 1,
-
-   list: [],
-
-   tabs: [
-    {
-     name: '自选',
-     id: 1
-    },
-    {
-     name: 'USDT交易市场',
-     id: 0
-    },
-    {
-     name: '现货',
-     id: 2
-    },
-    // {
-    //  name: 'USDT',
-    //  id: 3
-    // }
-   ],
-
-   ruleForm: {
-    page: 1,
-    size: 5,
-    symbol: undefined,
-    isCollect: 1
-   },
-
-   total: 0,
-
-   socket: null,
-   socketTime: null,
-    timer: null
-  }
- },
- mounted() {
-  this.getList()
-  this.createSocket()
- },
-  destroyed() {
-   clearTimeout(this.timer);
-  },
-  watch: {
-   'ruleForm.symbol' () {
-     if (this.timer !== null) {
-       clearTimeout(this.timer)
-     }
-
-     this.timer = setTimeout( () => {
-       this.onSearch()
-     }, 600)
-   }
-  },
-  computed: {
-    ...mapState({
-      // token
-      token: (state) => state.login?.token
-    }),
-  },
- methods: {
-  // 切换tabs
-  onTabs(e) {
-    console.log(e)
-   switch (e) {
-    case 1:
-     this.ruleForm.isCollect = 1;
-     break;
-    case 0:
-     this.ruleForm.isCollect = undefined;
-     break;
-   }
-   this.active = e
-
-   this.ruleForm.page = 1
-   if (e === 2) return this.getAssetsList()
-
-   this.getList()
-  },
-
-  // 搜索
-  onSearch() {
-   this.ruleForm.page = 1
-   this.getList()
-  },
-
-  // 获取现货列表
-  getAssetsList() {
-   Promise.try(async () => {
-    return await GetTradingPairs({isCollect: 0})
-   }).then((res) => {
-    console.log(res)
-    this.list = res.data.map(item => {
-     return {
-      symbolInfo: {
-       coinsName: item.spotCoin.coinsName,
-       icon: item.spotCoin.logo,
-      },
-      market: {
-       close: NumberFormat({val: item.spotCoinMarket.closePrice, minimumFractionDigits: item.spotCoin.coinScale}),
-       increase: item.spotCoinMarket.volatility,
-       increase24H: NumberFormat({val: item.spotCoinMarket.volatility, minimumFractionDigits: item.spotCoin.coinScale, style: 'percent'})
-      }
-     }
-    })
-   }).catch(err => {})
-  },
-
-  // 获取列表
-  getList() {
-   this.loading = true
-   Promise.try(async () => {
-    return await GetQuotesApi(this.ruleForm)
-   }).then(res => {
-    res.data.records.forEach(item => {
-     item.market.amount = NumberFormat({val: item.market.amount})
-     item.market.close = NumberFormat({val: item.market.close, minimumFractionDigits: 2})
-     item.market.increase = item.market.increase24H
-     item.market.increase24H = NumberFormat({val: item.market.increase24H, minimumFractionDigits: 2, style: 'percent'})
-      item.options = {
-      grid: {
-       bottom: 0,
-       left: 0,
-       top: 0,
-       right: 0
-      },
-      xAxis: {
-       show: false,
-       boundaryGap: false,
-       data: item.closeList.map(i => {
-        return dayjs(+i.id * 1000).format('YYYY-MM-DD HH:mm:ss')
-       })
-      },
-      yAxis: {
-       show: false,
-       type: 'value',
-       boundaryGap: [0, '30%']
-      },
-      dataZoom: [
-      ],
-      series: [
-       {
-        type: 'line',
-        smooth: 0.6,
-        symbol: 'none',
-        itemStyle: {
-         color: +item.market.increase < 0 ? '#ED3C2F' : '#0CBB57'
-        },
-        areaStyle: {
-         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-           offset: 0,
-           color: +item.market.increase < 0 ? 'rgba(237, 60, 47, 0.5)' : 'rgba(12, 187, 87, .5)'
-          },
-          {
-           offset: 1,
-           color: +item.market.increase24H < 0 ? 'rgba(237, 60, 47, 0)' : 'rgba(12, 187, 87, 0)'
-          }
-         ])
-        },
-        data: item.closeList.map(item => {
-         return item.close
-        })
-       }
-      ]
-     }
-    })
-
-    this.list = res.data.records
-    this.total = res.data.total
-   }).catch(() => {})
-   this.loading = false
-  },
-
-  // 创造实例
-  createSocket() {
-   console.log(process.env.VUE_APP_BASE_WS_TY)
-   this.socket = new WebSocket(process.env.VUE_APP_BASE_WS_TY + '/websocket');
-
-   this.socket.onopen = this.onOpen.bind(this)
-   this.socket.onmessage = this.onMessage.bind(this)
-   this.socket.onerror = this.onError.bind(this)
-   this.socket.onclose = this.onClose.bind(this)
-  },
-
-  // 开启socket链接
-  onOpen(e) {
-   let that = this
-   that.socket.send(JSON.stringify({
-    cmd: 'SUBSCRIBE',
-    data: {
-     topic: 'market.kline'
-    }
-   }))
-
-   that.socketTime = setTimeout(() => {
-    that.socket.send('ping')
-   }, 30000)
-  },
-
-  // 接收参数
-  onMessage(e) {
-   // 响应服务端
-   if (e.data === 'ping') return this.socket.send('pong')
-
-   // 回应服务端
-   if (e.data === 'pong') return
-
-   // 接收到的参数
-   try {
-    const data = JSON.parse(e.data).data
-    // console.log(data)
-    let find = this.list.find(item => item.symbolInfo.coinsName === data.symbol)
-
-    if (!find) return
-    data.close = NumberFormat({val: data.close})
-     data.increase = data.increase24H
-     data.increase24H = NumberFormat({val: data.increase24H, style: 'percent'})
-    find.market = {...find.market, ...data}
-   } catch (err) {
-    console.log(err, e, '我是错误信息')
-   }
-  },
-
-  // 异常
-  onError() {
-
-  },
-
-  // 关闭
-  onClose() {
-
-  },
-
-  // 页面发生变化
-  onCurrent(e) {
-   this.ruleForm.page = e
-   this.getList()
-  },
-
-  // 操作自选币种
-  async handleCurrency(item) {
-   this.loading = true
-   Promise.try(async () => {
-    return await HandleSymbol({symbol: item.symbolInfo.coinsName, collect: item.isCollect === 0 ? 1 : 0, symbolId: item.symbolInfo.coinsId, type: 'U'})
-   }).then(res => {
-    this.$message.success('操作成功')
-    this.getList()
-   }).catch(err => {
-    this.loading = false
-   })
-  },
-
-  closeWs() {
-   this.socket.close()
-  },
-
- }
-}
-</script>
-
 <template>
  <div class="area flex">
   <div class="c-search flex">
@@ -340,12 +57,303 @@ export default {
 
   <div v-if="list.length === 0 && active === 1" class="no-data-warp">
     <NoData :text="'暂无结果，前往市场添加'">
-      <el-button type="primary">添加自选</el-button>
+      <el-button type="primary" @click="onTabs(0)">添加自选</el-button>
     </NoData>
   </div>
 
  </div>
 </template>
+
+<script>
+import {GetQuotesApi, HandleSymbol} from "@/api/quotes";
+import BigNumberUtils from "@/utils/format";
+import Echarts from "@/components/Echarts/index.vue";
+import * as echarts from 'echarts';
+import dayjs from 'dayjs'
+import {NumberFormat} from "@/utils/format";
+import {GetTradingPairs} from "@/api/spotTrading";
+import NoData from "@/components/NoData.vue";
+import {mapState} from "vuex";
+
+const bigNumber = new BigNumberUtils()
+export default {
+  components: {
+    Echarts,
+    NoData
+  },
+  data() {
+    return {
+      loading: false,
+
+      active: 1,
+
+      list: [],
+
+      tabs: [
+        {
+          name: '自选',
+          id: 1
+        },
+        {
+          name: 'USDT交易市场',
+          id: 0
+        },
+        {
+          name: '现货',
+          id: 2
+        },
+        // {
+        //  name: 'USDT',
+        //  id: 3
+        // }
+      ],
+
+      ruleForm: {
+        page: 1,
+        size: 5,
+        symbol: undefined,
+        isCollect: 1
+      },
+
+      total: 0,
+
+      socket: null,
+      socketTime: null,
+      timer: null
+    }
+  },
+  mounted() {
+    this.getList()
+    this.createSocket()
+  },
+  destroyed() {
+    clearTimeout(this.timer);
+  },
+  watch: {
+    'ruleForm.symbol' () {
+      if (this.timer !== null) {
+        clearTimeout(this.timer)
+      }
+
+      this.timer = setTimeout( () => {
+        this.onSearch()
+      }, 600)
+    }
+  },
+  computed: {
+    ...mapState({
+      // token
+      token: (state) => state.login?.token
+    }),
+  },
+  methods: {
+    // 切换tabs
+    onTabs(e) {
+      console.log(e)
+      switch (e) {
+        case 1:
+          this.ruleForm.isCollect = 1;
+          break;
+        case 0:
+          this.ruleForm.isCollect = undefined;
+          break;
+      }
+      this.active = e
+
+      this.ruleForm.page = 1
+      if (e === 2) return this.getAssetsList()
+
+      this.getList()
+    },
+
+    // 搜索
+    onSearch() {
+      this.ruleForm.page = 1
+      this.getList()
+    },
+
+    // 获取现货列表
+    getAssetsList() {
+      Promise.try(async () => {
+        return await GetTradingPairs({isCollect: 0})
+      }).then((res) => {
+        console.log(res)
+        this.list = res.data.map(item => {
+          return {
+            symbolInfo: {
+              coinsName: item.spotCoin.coinsName,
+              icon: item.spotCoin.logo,
+            },
+            market: {
+              close: NumberFormat({val: item.spotCoinMarket.closePrice, minimumFractionDigits: item.spotCoin.coinScale}),
+              increase: item.spotCoinMarket.volatility,
+              increase24H: NumberFormat({val: item.spotCoinMarket.volatility, minimumFractionDigits: item.spotCoin.coinScale, style: 'percent'})
+            }
+          }
+        })
+      }).catch(err => {})
+    },
+
+    // 获取列表
+    getList() {
+      this.loading = true
+      Promise.try(async () => {
+        return await GetQuotesApi(this.ruleForm)
+      }).then(res => {
+        res.data.records.forEach(item => {
+          item.market.amount = NumberFormat({val: item.market.amount})
+          item.market.close = NumberFormat({val: item.market.close, minimumFractionDigits: 2})
+          item.market.increase = item.market.increase24H
+          item.market.increase24H = NumberFormat({val: item.market.increase24H, minimumFractionDigits: 2, style: 'percent'})
+          item.options = {
+            grid: {
+              bottom: 0,
+              left: 0,
+              top: 0,
+              right: 0
+            },
+            xAxis: {
+              show: false,
+              boundaryGap: false,
+              data: item.closeList.map(i => {
+                return dayjs(+i.id * 1000).format('YYYY-MM-DD HH:mm:ss')
+              })
+            },
+            yAxis: {
+              show: false,
+              type: 'value',
+              boundaryGap: [0, '30%']
+            },
+            dataZoom: [
+            ],
+            series: [
+              {
+                type: 'line',
+                smooth: 0.6,
+                symbol: 'none',
+                itemStyle: {
+                  color: +item.market.increase < 0 ? '#ED3C2F' : '#0CBB57'
+                },
+                areaStyle: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    {
+                      offset: 0,
+                      color: +item.market.increase < 0 ? 'rgba(237, 60, 47, 0.5)' : 'rgba(12, 187, 87, .5)'
+                    },
+                    {
+                      offset: 1,
+                      color: +item.market.increase24H < 0 ? 'rgba(237, 60, 47, 0)' : 'rgba(12, 187, 87, 0)'
+                    }
+                  ])
+                },
+                data: item.closeList.map(item => {
+                  return item.close
+                })
+              }
+            ]
+          }
+        })
+
+        this.list = res.data.records
+        this.total = res.data.total
+      }).catch(() => {})
+      this.loading = false
+    },
+
+    // 创造实例
+    createSocket() {
+      console.log(process.env.VUE_APP_BASE_WS_TY)
+      this.socket = new WebSocket(process.env.VUE_APP_BASE_WS_TY + '/websocket');
+
+      this.socket.onopen = this.onOpen.bind(this)
+      this.socket.onmessage = this.onMessage.bind(this)
+      this.socket.onerror = this.onError.bind(this)
+      this.socket.onclose = this.onClose.bind(this)
+    },
+
+    // 开启socket链接
+    onOpen(e) {
+      let that = this
+      that.socket.send(JSON.stringify({
+        cmd: 'SUBSCRIBE',
+        data: {
+          topic: 'market.kline'
+        }
+      }))
+
+      that.socketTime = setTimeout(() => {
+        that.socket.send('ping')
+      }, 30000)
+    },
+
+    // 接收参数
+    onMessage(e) {
+      // 响应服务端
+      if (e.data === 'ping') return this.socket.send('pong')
+
+      // 回应服务端
+      if (e.data === 'pong') return
+
+      // 接收到的参数
+      try {
+        const data = JSON.parse(e.data).data
+        // console.log(data)
+        let find = this.list.find(item => item.symbolInfo.coinsName === data.symbol)
+
+        if (!find) return
+        data.close = NumberFormat({val: data.close})
+        data.increase = data.increase24H
+        data.increase24H = NumberFormat({val: data.increase24H, style: 'percent'})
+        find.market = {...find.market, ...data}
+      } catch (err) {
+        console.log(err, e, '我是错误信息')
+      }
+    },
+
+    // 异常
+    onError() {
+
+    },
+
+    // 关闭
+    onClose() {
+
+    },
+
+    // 页面发生变化
+    onCurrent(e) {
+      this.ruleForm.page = e
+      this.getList()
+    },
+
+    // 操作自选币种
+    async handleCurrency(item) {
+      if (!this.token) {
+        await this.$router.push({
+          path: "/login",
+          query: {redirect: this.$route.fullPath},
+        });
+        return;
+      }
+
+      this.loading = true
+      Promise.try(async () => {
+        return await HandleSymbol({symbol: item.symbolInfo.coinsName, collect: item.isCollect === 0 ? 1 : 0, symbolId: item.symbolInfo.coinsId, type: 'U'})
+      }).then(res => {
+        this.$message.success('操作成功')
+        this.getList()
+      }).catch(err => {
+        this.loading = false
+      })
+    },
+
+    closeWs() {
+      this.socket.close()
+    },
+
+  }
+}
+</script>
 
 <style scoped lang="scss">
 .area {

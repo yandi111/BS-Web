@@ -16,6 +16,8 @@ import basic from './module/basic'
 // import kycList from "./module/kyList"
 import KyList from "./module/KyList";
 
+import socketStore from './module/socketStore'
+
 const persistedState = createPersistedState({
  key: 'my-vuex-store',
  paths: [
@@ -52,7 +54,8 @@ export default new Vuex.Store({
   square,
   initList,
   userInfo,
-  KyList
+  KyList,
+  socketStore
  },
  // plugins: [
  //   createPersistedState({

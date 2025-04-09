@@ -208,9 +208,9 @@
     width: 100vw; /* 使容器宽度满屏 */
   }
   
-  .box {
-    border: 1px solid #252525;
-  }
+  /*.box {*/
+  /*  border: 1px solid #252525;*/
+  /*}*/
   .tabBar {
     a {
       color: #90FF00;

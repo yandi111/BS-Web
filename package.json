@@ -16,6 +16,7 @@
     "base32.js": "^0.1.0",
     "bignumber.js": "^9.1.2",
     "core-js": "^3.8.3",
+    "countup.js": "^2.8.0",
     "cropperjs": "^1.5.13",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",

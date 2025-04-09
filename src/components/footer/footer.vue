@@ -2,7 +2,7 @@
  <div class="footer">
   <div class="footer_d flex w-1203" :class="changePadding?'footer_d1':''">
    <div class="footer_d_b icon">
-    <img class="footer_icon" src="../../assets/images/footer_logo.png" alt=""/>
+    <img class="footer_icon" src="../../assets/images/icon/icon_logo.png" alt=""/>
     <div>
      <p class="subTitle">{{ $t("lang_1284") }}</p>
      <p class="subTitle">contact@ubex.tech</p>
@@ -59,18 +59,23 @@ export default {
       },
       {
        id: 2,
-       name: '博客',
-       url: "",
+       name: 'AML 条款',
+       url: "https://ubexsupport.zendesk.com/hc/zh-cn/articles/44348990499225-AML-%E6%9D%A1%E6%AC%BE",
       },
+       {
+         id: 5,
+         name: 'KYC 条款',
+         url: "https://ubexsupport.zendesk.com/hc/zh-cn/articles/44348903176345-KYC-%E6%9D%A1%E6%AC%BE",
+       },
       {
        id: 3,
        name: '服务协议',
-       url: "",
+       url: "https://ubexsupport.zendesk.com/hc/zh-cn/articles/44348868151833-%E7%94%A8%E6%88%B7%E4%B8%8E%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE",
       },
       {
        id: 4,
        name: '隐私协议',
-       url: "",
+       url: "https://ubexsupport.zendesk.com/hc/zh-cn/articles/44348868151833-%E7%94%A8%E6%88%B7%E4%B8%8E%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE",
       },
      ],
     },
@@ -89,7 +94,7 @@ export default {
       },
       {
        id: 7,
-       name: '成为合伙人',
+       name: '成为超级合伙人',
        url: "",
       },
      ],
@@ -128,6 +133,7 @@ export default {
    }
   },
   toPage(val) {
+    console.log(val)
    if (val.url === "/information/compliance") {
     this.$router.push({
      path: val.url,
@@ -138,9 +144,16 @@ export default {
    } else if (val.url === "") {
     zE("messenger", "open");
    } else {
-    this.$router.push(val.url);
+     if (this.isExternalLink(val.url)) {
+       window.open(val.url, '_blank');
+     } else {
+       this.$router.push(val.url);
+     }
    }
   },
+   isExternalLink(link) {
+     return /^(http|https|www):\/\//.test(link);
+   }
  },
 };
 </script>

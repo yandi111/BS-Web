@@ -345,6 +345,14 @@ const routes = [
       keepAlive: false,
     },
   },
+  {
+    path: "/aboutUs",
+    component: () => import("@/views/apiDocuments/index.vue"),
+    meta: {
+      title: "api文档",
+      keepAlive: false,
+    },
+  },
   ...walletRoutes,
   ...NoticeRoutes,
   ...PostRoutes,

@@ -18,10 +18,15 @@ module.exports = defineConfig({
     devServer: {
         proxy: {
             "/api": {
-                target: 'https://ubex.me', // 目标 API 服务器
+                target: 'http://47.243.6.115', // 目标 API 服务器
                 changeOrigin: true, // 允许跨域
                 pathRewrite: { '^/api': '' }, // 重写路径
-            }
+            },
+            // "/api": {
+            //     target: 'https://ubex.me', // 目标 API 服务器
+            //     changeOrigin: true, // 允许跨域
+            //     pathRewrite: { '^/api': '' }, // 重写路径
+            // }
             // '/bsex-market': {
             //     target: 'http://192.168.110.23', // 目标 API 服务器
             //     changeOrigin: true, // 允许跨域

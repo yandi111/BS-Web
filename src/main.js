@@ -4,17 +4,27 @@ import router from "./router";
 import store from "./store";
 import ElementUI from "element-ui";
 
-import { thousandth, formatNumberWithCommas } from "./utils/thousandth";
-import { removeTrailingZeros } from "./utils/thousandth";
-import { formatTimestamp, toTwoDecimals, dataInitialization, formatPrice, formatAmount, thousandthPrice } from "./utils/thousandth";
-import { copyContent } from "./utils/thousandth";
-import { formatInit } from "./utils/formateTimeStamp";
-import { logOut } from "./utils/logOut";
-// formatTimeInit
-import { formatTimeInit } from "./utils/formateTimeStamp";
-import { customMessage } from "./utils/messageList/message";
+//现货
+import coinSocket from '@/socket/webSocket1'
 
-import { formatTimesYMDHMS, formatTimesYMD } from "./utils/formateTimeStamp";
+import {thousandth, formatNumberWithCommas} from "./utils/thousandth";
+import {removeTrailingZeros} from "./utils/thousandth";
+import {
+    formatTimestamp,
+    toTwoDecimals,
+    dataInitialization,
+    formatPrice,
+    formatAmount,
+    thousandthPrice
+} from "./utils/thousandth";
+import {copyContent} from "./utils/thousandth";
+import {formatInit} from "./utils/formateTimeStamp";
+import {logOut} from "./utils/logOut";
+// formatTimeInit
+import {formatTimeInit} from "./utils/formateTimeStamp";
+import {customMessage} from "./utils/messageList/message";
+
+import {formatTimesYMDHMS, formatTimesYMD} from "./utils/formateTimeStamp";
 
 import "./assets/style/common.scss";
 import "./assets/style/global.scss";
@@ -49,28 +59,31 @@ import VueClipBoard from "vue-clipboard2";
 import i18n from "./i18n/i18nLocale";
 
 // rsa加密
-import { getEncryptCode } from "@/libs/encrypt.js";
+import {getEncryptCode} from "@/libs/encrypt.js";
 
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
+
 Vue.prototype.$hljs = hljs;
 
 // import "default-passive-events";
 
 // 常用工具
 import {
-  formatNumber,
-  scrollToTop,
-  formatTime,
-  newFormatTime,
-  getTime,
-  parseTime,
+    formatNumber,
+    scrollToTop,
+    formatTime,
+    newFormatTime,
+    getTime,
+    parseTime,
 } from "@/libs/utils.js";
 
 // 弹窗and缓存
-import { cache, modal } from "@/libs/index.js";
+import {cache, modal} from "@/libs/index.js";
+
 Vue.prototype.$cache = cache;
 Vue.prototype.$modal = modal;
+Vue.prototype.$socket = coinSocket
 
 // =全局注册组件
 import useComp from "@/components/useComp.js";
@@ -116,19 +129,23 @@ Vue.prototype.$formatPrice = formatPrice;
 Vue.prototype.$formatAmount = formatAmount;
 Vue.prototype.$thousandthPrice = thousandthPrice;
 
+//初始化币币ws
+coinSocket.init(store)
+
 import loadingDirective from "./utils/loadingDirective";
+
 Vue.directive('loads', loadingDirective); // 注册自定义指令
 Vue.directive("highlight", function (el) {
-  let blocks = el.querySelectorAll("pre code");
-  blocks.forEach((block) => {
-    hljs.highlightBlock(block);
-  });
+    let blocks = el.querySelectorAll("pre code");
+    blocks.forEach((block) => {
+        hljs.highlightBlock(block);
+    });
 });
 
 Vue.use(ElementUI, {
-  i18n: (key, value) => {
-    return i18n.t(key, value);
-  },
+    i18n: (key, value) => {
+        return i18n.t(key, value);
+    },
 });
 Vue.use(VueClipBoard);
 Vue.use(tipsPlugin);
@@ -140,16 +157,16 @@ Vue.use(VueAwesomeSwiper);
 Vue.config.productionTip = false;
 
 Vue.filter("translate", function (value) {
-  if (value === 0 || value === "0") {
-    return 0;
-  } else {
-    return i18n.t(value);
-  }
+    if (value === 0 || value === "0") {
+        return 0;
+    } else {
+        return i18n.t(value);
+    }
 });
 
 new Vue({
-  router,
-  store,
-  i18n,
-  render: (h) => h(App),
+    router,
+    store,
+    i18n,
+    render: (h) => h(App),
 }).$mount("#app");

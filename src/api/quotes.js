@@ -1,4 +1,4 @@
-import { post } from '@/request'
+import { post, get } from '@/request'
 import { instance } from "@/request/request";
 
 // 行情 U本位合约行情列表
@@ -19,3 +19,5 @@ export function rateQuery(data) {
     data: { ...data },
   })
 }
+
+export const GetCoinNewsApi = data => get(instance, '/bsex-market/home/getCoinNews', data)

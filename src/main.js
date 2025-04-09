@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import ElementUI from "element-ui";
+import lottie from 'vue-lottie'
 
 //现货
 import coinSocket from '@/socket/webSocket1'
@@ -87,7 +88,7 @@ Vue.prototype.$socket = coinSocket
 
 // =全局注册组件
 import useComp from "@/components/useComp.js";
-
+Vue.component('lottie', lottie)
 Vue.component("myEmpty", myEmpty);
 Vue.component("myInput", myInput);
 Vue.component("myButton", myButton);

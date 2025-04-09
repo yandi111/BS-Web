@@ -122,8 +122,8 @@
 
       <div class="info-box flex ic jb">
         <div class="left-box">
-          <div class="title">合法合规</div>
-          <div class="desc">UBEX严格遵守法律和监管标准，为我们的用户提供安全的交易环境</div>
+          <div class="title">{{$t('home_8')}}</div>
+          <div class="desc">{{$t('home_8')}}</div>
         </div>
         <img src="@/assets/images/home/info-b.png" alt="">
       </div>

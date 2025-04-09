@@ -1,7 +1,7 @@
 <!-- 行情 -->
 <template>
   <div class="quotes w-1203">
-    <h1 class="title">{{$t('市场')}}</h1>
+    <h1 class="title">{{$t('market_001')}}</h1>
 
     <!-- 热门区域 -->
     <Hot />

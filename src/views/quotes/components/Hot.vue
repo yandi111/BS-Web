@@ -128,7 +128,7 @@ export default {
 <template>
   <div class="box flex">
     <div v-for="(item, index) of list" :key="index" class="card flex">
-      <p class="card_subTitle">{{ $t('24小时热门') }}</p>
+      <p class="card_subTitle">{{ $t('market_002') }}</p>
 
       <div class="card_section flex jb">
         <div class="card_left flex">
@@ -145,7 +145,7 @@ export default {
       <div class="card_rato flex">
         <p :class="[+item.market.increase24H < 0 ? 'reduce' : 'add', 'card_label_Increase card_label']">
           {{ +item.market.increase24H > 0 ? '+' : '' }}{{ item.market.increase24H }}%</p>
-        <p class="card_label">{{ $t('24h成交量') }}</p>
+        <p class="card_label">{{ $t('market_003') }}</p>
         <p class="card_label">{{ item.market.vol }} {{ item.symbolInfo.coinsName.replace('-USDT', '') }}</p>
       </div>
 

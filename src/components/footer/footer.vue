@@ -50,66 +50,66 @@ export default {
   return {
    fieldsList: [
     {
-     type: '关于',
+     type: this.$t('footer_01'),
      child: [
       {
        id: 1,
-       name: '关于我们',
-       url: "",
+       name: this.$t('footer_02'),
+       url: "/aboutUs",
       },
       {
        id: 2,
-       name: 'AML 条款',
+       name: this.$t('footer_03'),
        url: "https://ubexsupport.zendesk.com/hc/zh-cn/articles/44348990499225-AML-%E6%9D%A1%E6%AC%BE",
       },
        {
          id: 5,
-         name: 'KYC 条款',
+         name: this.$t('footer_04'),
          url: "https://ubexsupport.zendesk.com/hc/zh-cn/articles/44348903176345-KYC-%E6%9D%A1%E6%AC%BE",
        },
       {
        id: 3,
-       name: '服务协议',
+       name: this.$t('footer_05'),
        url: "https://ubexsupport.zendesk.com/hc/zh-cn/articles/44348868151833-%E7%94%A8%E6%88%B7%E4%B8%8E%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE",
       },
       {
        id: 4,
-       name: '隐私协议',
+       name: this.$t('footer_06'),
        url: "https://ubexsupport.zendesk.com/hc/zh-cn/articles/44348868151833-%E7%94%A8%E6%88%B7%E4%B8%8E%E9%9A%90%E7%A7%81%E6%9D%A1%E6%AC%BE",
       },
      ],
     },
     {
-     type: '服务',
+     type: this.$t('footer_07'),
      child: [
       {
        id: 5,
-       name: '现货交易',
+       name: this.$t('footer_08'),
        url: "",
       },
       {
        id: 6,
-       name: 'U本位合约',
+       name: this.$t('footer_09'),
        url: "",
       },
       {
        id: 7,
-       name: '成为超级合伙人',
+       name: this.$t('footer_10'),
        url: "",
       },
      ],
     },
     {
-     type: '帮助',
+     type: this.$t('footer_11'),
      child: [
       {
        id: 16,
-       name: '帮助中心',
+       name: this.$t('footer_12'),
        url: "",
       },
       {
        id: 8,
-       name: '费率标准',
+       name: this.$t('footer_13'),
        url: "",
       },
      ],

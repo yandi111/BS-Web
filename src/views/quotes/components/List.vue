@@ -45,9 +45,9 @@
       <p :class="[+row.market.increase < 0 ? 'reduce' : 'add']">{{ +row.market.increase > 0 ? '+' : '' }}{{ row.market.increase24H }}</p>
      </template>
     </el-table-column>
-    <el-table-column label="操作" width="80" align="right">
+    <el-table-column :label="$t('market_008')" width="80" align="right">
      <template slot-scope="{row}">
-      <el-button type="success">交易</el-button>
+      <el-button type="success">{{$t('market_009')}}</el-button>
      </template>
     </el-table-column>
    </el-table>
@@ -56,8 +56,8 @@
   </div>
 
   <div v-if="list.length === 0 && active === 1" class="no-data-warp">
-    <NoData :text="'暂无结果，前往市场添加'">
-      <el-button type="primary" @click="onTabs(0)">添加自选</el-button>
+    <NoData :text="$t('market_007')">
+      <el-button type="primary" @click="onTabs(0)">{{ $t('market_008')}}</el-button>
     </NoData>
   </div>
 
@@ -91,15 +91,15 @@ export default {
 
       tabs: [
         {
-          name: '自选',
+          name: this.$t('market_004'),
           id: 1
         },
         {
-          name: 'USDT交易市场',
+          name: this.$t('market_005'),
           id: 0
         },
         {
-          name: '现货',
+          name: this.$t('market_005'),
           id: 2
         },
         // {

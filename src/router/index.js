@@ -332,6 +332,15 @@ const routes = [
         },
       },
 
+      {
+        path: "/aboutUs",
+        component: () => import("@/views/aboutUs/index.vue"),
+        meta: {
+          title: "关于我们",
+          keepAlive: false,
+        },
+      },
+
       // 路由模块
       ...userRoutes,
     ],
@@ -339,14 +348,6 @@ const routes = [
   //api 文档
   {
     path: "/apiDocument",
-    component: () => import("@/views/apiDocuments/index.vue"),
-    meta: {
-      title: "api文档",
-      keepAlive: false,
-    },
-  },
-  {
-    path: "/aboutUs",
     component: () => import("@/views/apiDocuments/index.vue"),
     meta: {
       title: "api文档",

@@ -139,6 +139,8 @@ export default {
   ...mapGetters(["getCurIndex", "getAuthOptions", "getAuthBizEnum", "getBizId",]),
  },
  mounted() {
+   const num = this.$route.query.regTppe || 1;
+   this.$store.commit('setCurIndex', num)
 
   this.curIndex = this.getCurIndex;
  },

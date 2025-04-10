@@ -18,7 +18,7 @@ module.exports = defineConfig({
     devServer: {
         proxy: {
             "/api": {
-                target: 'http://47.243.6.115', // 目标 API 服务器
+                target: 'https://bsex.me', // 目标 API 服务器
                 changeOrigin: true, // 允许跨域
                 pathRewrite: { '^/api': '' }, // 重写路径
             },

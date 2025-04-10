@@ -12,7 +12,7 @@
         {{ $t('home_2') }}
       </h2>
 
-      <div class="register flex">
+      <div class="register flex" v-if="!getToken">
         <el-input v-model="ruleForm.username" :placeholder="$t('home_3')"/>
 
         <el-button type="primary" @click="$router.push({name: 'register', query: {msg: ruleForm.username}})">
@@ -58,8 +58,8 @@
           <p>{{ $t('home_5') }}</p>
 
           <div class="download_icon flex">
-            <a><img class="phone" src="@/assets/images/home/phone-b.png" alt="手机"></a>
-            <a class="flex ic"><img class="email" src="@/assets/images/home/email-b.png" alt="邮箱"></a>
+            <a @click="go('/register', {regTppe: 0})"><img class="phone" src="@/assets/images/home/phone-b.png" alt="手机"></a>
+            <a @click="go('/register', {regTppe: 1})" class="flex ic"><img class="email" src="@/assets/images/home/email-b.png" alt="邮箱"></a>
           </div>
         </div>
 
@@ -88,8 +88,14 @@
       <div class="currency">
         <div class="flex jb currency_header">
           <div class="flex tab">
-            <a @click="setTab(0)" :class="currency_type === 0 ? 'active' : ''">{{ $t('lang_1717') }}</a>
-            <a @click="setTab(1)" :class="currency_type === 1 ? 'active' : ''">{{ $t('home_6') }}</a>
+            <a @click="setTab(0)" :class="currency_type === 0 ? 'active' : ''">
+              {{ $t('lang_1717') }}
+              <img v-if="currency_type === 0" src="@/assets/images/home/bottom-line.png" alt="">
+            </a>
+            <a @click="setTab(1)" :class="currency_type === 1 ? 'active' : ''">
+              {{ $t('home_6') }}
+              <img v-if="currency_type === 1" src="@/assets/images/home/bottom-line.png" alt="">
+            </a>
           </div>
           <a class="all">{{ $t('home_7') }}</a>
         </div>
@@ -123,7 +129,7 @@
       <div class="info-box flex ic jb">
         <div class="left-box">
           <div class="title">{{$t('home_8')}}</div>
-          <div class="desc">{{$t('home_8')}}</div>
+          <div class="desc">{{$t('home_9')}}</div>
         </div>
         <img src="@/assets/images/home/info-b.png" alt="">
       </div>
@@ -219,6 +225,12 @@ export default {
   },
   methods: {
     ...mapActions(['fetchInitListInfo']),
+    go(path, query) {
+      this.$router.push({
+        path,
+        query
+      })
+    },
     async setTab(tab) {
       this.currency_type = tab
       if (tab === 0) {
@@ -370,7 +382,7 @@ export default {
             line-height: 48px;
             border-color: $border_color;
             background-color: transparent;
-            color: $colorD;
+            color: #737373;
             transition: .3s;
             border-radius: 8px;
 
@@ -564,6 +576,12 @@ export default {
       }
 
       .tab {
+
+        img{
+          width: 18px;
+          height: 2px;
+          margin: 3px auto 0 auto;
+        }
         a {
           position: relative;
           @include Font((
@@ -573,26 +591,10 @@ export default {
 
           &.active {
             color: $white;
-
-            &:after {
-              background-color: $colorA;
-            }
           }
 
           &:first-child {
             margin-right: 20px;
-          }
-
-          &:after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            width: 80%;
-            height: 2px;
-            border-radius: 2px;
           }
         }
       }

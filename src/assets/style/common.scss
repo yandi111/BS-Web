@@ -388,3 +388,9 @@ blockquote:after {
     color: #F0F0F0;
   }
 }
+
+.el-input .el-input__inner{
+  &::placeholder {
+    color: #737373 !important;
+  }
+}

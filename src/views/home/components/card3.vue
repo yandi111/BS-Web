@@ -20,7 +20,7 @@
           <template #title>
             <div class="tag flex">
               <p class="flex"><i>2</i>{{ $t('home_28') }}</p>
-              <i :class="[+activeId !== 1 ? 'el-icon-plus' : 'el-icon-minus', '']"></i>
+              <i :class="[+activeId !== 2 ? 'el-icon-plus' : 'el-icon-minus', '']"></i>
             </div>
           </template>
           <p class="mb-26">{{ $t('home_29') }}</p>
@@ -34,7 +34,7 @@
           <template #title>
             <div class="tag flex">
               <p class="flex"><i>3</i>{{ $t('home_41') }}</p>
-              <i :class="[+activeId !== 1 ? 'el-icon-plus' : 'el-icon-minus', '']"></i>
+              <i :class="[+activeId !== 3 ? 'el-icon-plus' : 'el-icon-minus', '']"></i>
             </div>
           </template>
           <p v-html="html_4"></p>
@@ -44,7 +44,7 @@
           <template #title>
             <div class="tag flex">
               <p class="flex"><i>4</i>{{ $t('home_46') }}</p>
-              <i :class="[+activeId !== 1 ? 'el-icon-plus' : 'el-icon-minus', '']"></i>
+              <i :class="[+activeId !== 4 ? 'el-icon-plus' : 'el-icon-minus', '']"></i>
             </div>
           </template>
           <p v-html="html_5"></p>
@@ -54,7 +54,7 @@
           <template #title>
             <div class="tag flex">
               <p class="flex"><i>5</i>{{ $t('home_52') }}</p>
-              <i :class="[+activeId !== 1 ? 'el-icon-plus' : 'el-icon-minus', '']"></i>
+              <i :class="[+activeId !== 5 ? 'el-icon-plus' : 'el-icon-minus', '']"></i>
             </div>
           </template>
           <p v-html="html_6"></p>
@@ -129,7 +129,7 @@ export default {
       align-items: center;
 
       &:not(:last-child) {
-        margin-bottom: 52px;
+        margin-bottom: 54px;
       }
 
       &_index {
@@ -221,7 +221,7 @@ p {
 
       p {
         padding-left: 41px;
-        @include Font((color: $colorD, size: 16px));
+        @include Font((color: $colorF, size: 16px));
 
         span {
           @include Font((color: $colorA, size: 16px));

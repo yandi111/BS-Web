@@ -361,6 +361,15 @@ blockquote:after {
       border-color: #252525;
     }
   }
+
+  &.el-button--success {
+    background-color: #90FF00 !important;
+    border-color: #90FF00 !important;
+
+    span {
+      color: #252525 !important;
+    }
+  }
 }
 
 .el-popover {
@@ -389,7 +398,7 @@ blockquote:after {
   }
 }
 
-.el-input .el-input__inner{
+.el-input .el-input__inner {
   &::placeholder {
     color: #737373 !important;
   }

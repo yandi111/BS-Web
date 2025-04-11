@@ -22,7 +22,7 @@
 
       <div class="allAssets flex" v-if="getToken">
         <h6 class="flex">{{ $t('home_4') }} <img @click="isCurrency = !isCurrency"
-                                                 src="../../../assets/images/icon_eye_close.png" alt=""/></h6>
+                                                 :src="isCurrency ? require('../../../assets/images/icon_eye_close.png') : require('@/assets/images/eye-open-b.png')" alt=""/></h6>
 
         <div class="assets flex" v-if="isCurrency">
           <h1 class="flex">{{ info.totalAsset }}</h1>
@@ -567,7 +567,7 @@ export default {
       border-radius: 10px;
 
       .currency_main {
-        height: 300px;
+        height: 226px;
         overflow-y: auto;
       }
 

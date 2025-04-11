@@ -451,7 +451,7 @@ export default {
   flex-direction: column;
 
   .c-search {
-    margin-bottom: 17px;
+    margin-bottom: 18px;
     align-items: center;
     justify-content: space-between;
 
@@ -464,7 +464,7 @@ export default {
           border-radius: 4px;
           background-color: #252525;
           border-color: #252525;
-          @include Font((size: 12px, color: #fff));
+          @include Font((size: 12px, color: #90ff00));
 
           &::placeholder {
             color: #737373
@@ -630,6 +630,7 @@ export default {
     padding: 4px 21px;
     margin-right: 10px;
     cursor: pointer;
+    margin-bottom: 18px;
 
     &.active {
       border: 1px solid #252525;

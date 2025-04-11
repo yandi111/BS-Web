@@ -3,15 +3,22 @@
   <div class="card flex">
     <h2 class="title">{{ $t('home_57') }}</h2>
 
-    <el-button type="primary" @click="$router.push('register')">{{ $t('lang_943') }}</el-button>
+    <el-button v-if="!getToken" type="primary" @click="$router.push('register')">{{ $t('lang_943') }}</el-button>
+    <el-button v-else type="primary" @click="">{{ $t('lang_1716') }}</el-button>
+
   </div>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   data() {
     return {}
-  }
+  },
+  computed: {
+    ...mapGetters(['getToken']),
+  },
 }
 </script>
 

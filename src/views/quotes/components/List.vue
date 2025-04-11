@@ -34,14 +34,14 @@
                 <!-- <p class="name">BTC <span>USDT</span></p> -->
                 <p class="name">{{ row.symbolInfo.coinsName.split('-')[0] }}
                   <span>{{ row.symbolInfo.coinsName.split('-')[1] }}</span></p>
-                <p class="content">{{ $t('spot_33') }}</p>
+                <p class="content">{{ row.listType === 'contract' ? $t('spot_33') : $t('market_006') }}</p>
               </div>
             </div>
           </template>
         </el-table-column>
         <el-table-column :label="$t('lang_1363')">
           <template slot-scope="{row}">
-            <Echarts :option="row.options" width="96px" height="50px"/>
+            <Echarts v-if="row.listType === 'contract'" :option="row.options" width="96px" height="50px"/>
           </template>
         </el-table-column>
         <el-table-column :label="$t('lang_1724')">

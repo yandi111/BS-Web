@@ -97,7 +97,7 @@
               <img v-if="currency_type === 1" src="@/assets/images/home/bottom-line.png" alt="">
             </a>
           </div>
-          <a class="all">{{ $t('home_7') }}</a>
+          <a class="all" @click="$router.push({path: '/quotes'})">{{ $t('home_7') }}</a>
         </div>
         <div v-if="currency_type === 0" class="currency_main">
           <div v-for="(item,index) in hotCoinList" :key="index" class="flex jb item">

@@ -338,6 +338,7 @@ const routes = [
         meta: {
           title: "关于我们",
           keepAlive: false,
+          footer: true
         },
       },
 
